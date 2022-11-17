@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/fit_importer.iml" filepath="$PROJECT_DIR$/.idea/fit_importer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/fit_importer.iml" filepath="$PROJECT_DIR$/fit_importer.iml" />
     </modules>
   </component>
 </project>
