@@ -35,6 +35,9 @@ public class FitImport {
         log.info("handle fit file upload ...");
         log.debug("handle fit file upload ...");
 
+        long size = file.getSize();
+        log.info("upload file size : " + size);
+
         FileInputStream inputStream;
         FitDecoder fitDecoder = new FitDecoder();
         inputStream = (FileInputStream) file.getInputStream();
@@ -53,7 +56,7 @@ public class FitImport {
             System.out.println("file id messages  : " + fitMessages.getFileIdMesgs().size());
             System.out.println("device info messages  : " + fitMessages.getDeviceInfoMesgs().size());
             System.out.println("activity messages : " + fitMessages.getActivityMesgs().size());
-            System.out.println("activity messages : " + fitMessages.getRecordMesgs().size());
+            System.out.println("record messages : " + fitMessages.getRecordMesgs().size());
         }
     }
 
