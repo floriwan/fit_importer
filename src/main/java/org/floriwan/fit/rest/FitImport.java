@@ -2,31 +2,48 @@ package org.floriwan.fit.rest;
 
 import com.garmin.fit.FitDecoder;
 import com.garmin.fit.FitMessages;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 
+@RestController
 public class FitImport {
+
+    private static Log log = LogFactory.getLog(FitImport.class);
+
+    @PostMapping("/test")
+    public ResponseEntity<String> handleTest() {
+        log.debug("handle test debug ...");
+        log.info("handle test info ...");
+        return ResponseEntity.status(HttpStatus.OK).body("test ok");
+    }
+
     @PostMapping("/")
     public String handleFitUpload(@RequestParam("file") MultipartFile file,
-                                  RedirectAttributes redirectAttributes) {
+                                  RedirectAttributes redirectAttributes)
+            throws IOException {
+
+        log.info("handle fit file upload ...");
+        log.debug("handle fit file upload ...");
 
         FileInputStream inputStream;
         FitDecoder fitDecoder = new FitDecoder();
+        inputStream = (FileInputStream) file.getInputStream();
 
-        try {
-            inputStream = (FileInputStream) file.getInputStream();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
 
         FitMessages fitMessages = fitDecoder.decode(inputStream);
-        System.out.println("file decoded");
+
         printMessageSummary(fitMessages);
+        log.info("import date : " + fitMessages.getDeviceInfoMesgs().get(0).getTimestamp());
 
         return "redirect:/";
     }
@@ -34,6 +51,7 @@ public class FitImport {
     private static void printMessageSummary(FitMessages fitMessages) {
         if(!fitMessages.getFileIdMesgs().isEmpty()) {
             System.out.println("file id messages  : " + fitMessages.getFileIdMesgs().size());
+            System.out.println("device info messages  : " + fitMessages.getDeviceInfoMesgs().size());
             System.out.println("activity messages : " + fitMessages.getActivityMesgs().size());
             System.out.println("activity messages : " + fitMessages.getRecordMesgs().size());
         }
