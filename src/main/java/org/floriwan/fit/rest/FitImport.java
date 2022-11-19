@@ -41,16 +41,19 @@ public class FitImport {
         FileInputStream inputStream;
         FitDecoder fitDecoder = new FitDecoder();
         inputStream = (FileInputStream) file.getInputStream();
-
-
         FitMessages fitMessages = fitDecoder.decode(inputStream);
 
-        printMessageSummary(fitMessages);
-        log.info("import date : " + fitMessages.getDeviceInfoMesgs().get(0).getTimestamp());
+        FitImporter.getInstance().Import(file.getOriginalFilename(), fitMessages);
+
+        fitMessages.getFileIdMesgs().get(0).getType();
+        //printMessageSummary(fitMessages);
+        //log.info("import date : " + fitMessages.getDeviceInfoMesgs().get(0).getTimestamp());
+        //log.info("file name : " + file.getOriginalFilename());
 
         return "redirect:/";
     }
 
+    /*
     private static void printMessageSummary(FitMessages fitMessages) {
         if(!fitMessages.getFileIdMesgs().isEmpty()) {
             System.out.println("file id messages  : " + fitMessages.getFileIdMesgs().size());
@@ -58,6 +61,6 @@ public class FitImport {
             System.out.println("activity messages : " + fitMessages.getActivityMesgs().size());
             System.out.println("record messages : " + fitMessages.getRecordMesgs().size());
         }
-    }
+    }*/
 
 }
