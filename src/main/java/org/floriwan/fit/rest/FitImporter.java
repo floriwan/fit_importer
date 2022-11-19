@@ -26,10 +26,9 @@ public class FitImporter {
                 new Date());
 
         FileId fileId = FromFitToDao.toFileId(fitMessages.getFileIdMesgs().get(0));
-        //fitFile.setFileId(fileId.getId());
+        fitFile.setFileId(fileId);
 
         fitFileRepository.save(fitFile);
-        fileIdRepository.save(fileId);
 
     }
 }

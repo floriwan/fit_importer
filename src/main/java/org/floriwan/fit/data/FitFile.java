@@ -40,5 +40,12 @@ public class FitFile {
     @JoinColumn(name = "fit_activity_id", referencedColumnName = "id")
     private Activity activityId;
 
+    public void setFileId(FileId fileId) {
+        this.fileId = fileId;
+    }
+
+    public void setActivityId(Activity activityId) {
+        this.activityId = activityId;
+    }
 }
 
