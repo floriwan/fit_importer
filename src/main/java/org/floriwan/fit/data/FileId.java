@@ -1,6 +1,5 @@
 package org.floriwan.fit.data;
 
-import com.garmin.fit.DateTime;
 import com.garmin.fit.File;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -36,6 +35,10 @@ public class FileId {
     @Id
     @GeneratedValue
     private Integer id;
+
+    @OneToOne
+    @JoinColumn(name = "fit_upload_id", referencedColumnName = "id")
+    private FitUpload fitUpload;
 
     @Column
     private File type;
@@ -103,5 +106,9 @@ public class FileId {
 
     public String getProductName() {
         return productName;
+    }
+
+    public void setFitUploadId(FitUpload fitUpload) {
+        this.fitUpload = fitUpload;
     }
 }

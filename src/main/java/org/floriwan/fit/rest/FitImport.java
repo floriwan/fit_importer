@@ -5,7 +5,7 @@ import com.garmin.fit.FitMessages;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.floriwan.fit.data.FileIdRepository;
-import org.floriwan.fit.data.FitFileRepository;
+import org.floriwan.fit.data.FitUploadRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,19 +31,23 @@ public class FitImport {
     }
 
     @PostMapping("/")
-    public String handleFitUpload(@RequestParam("file") MultipartFile file,
-                                  RedirectAttributes redirectAttributes)
-            throws IOException {
+    public ResponseEntity<String> handleFitUpload(@RequestParam("file") MultipartFile file,
+                                                  RedirectAttributes redirectAttributes)
+    {
 
-        log.info("handle fit file upload ...");
-        log.debug("handle fit file upload ...");
-
-        long size = file.getSize();
-        log.info("upload file size : " + size);
+        log.info("upload fit file [" + file.getOriginalFilename() + "]" );
+        log.debug("upload file size : " + file.getSize());
 
         FileInputStream inputStream;
         FitDecoder fitDecoder = new FitDecoder();
-        inputStream = (FileInputStream) file.getInputStream();
+
+        try {
+            inputStream = (FileInputStream) file.getInputStream();
+        } catch (IOException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("cannot read upload file [" + file.getOriginalFilename() + "]");
+        }
+
         FitMessages fitMessages = fitDecoder.decode(inputStream);
 
         FitImporter.getInstance().Import(
@@ -52,27 +56,13 @@ public class FitImport {
                 file.getOriginalFilename(),
                 fitMessages);
 
-        //printMessageSummary(fitMessages);
-        //log.info("import date : " + fitMessages.getDeviceInfoMesgs().get(0).getTimestamp());
-        //log.info("file name : " + file.getOriginalFilename());
-
-        return "redirect:/";
+        return ResponseEntity.status(HttpStatus.OK).body("upload success");
     }
 
     @Autowired
-    public FitFileRepository fitFileRepository;
+    public FitUploadRepository fitFileRepository;
 
     @Autowired
     public FileIdRepository fileIdRepository;
-
-    /*
-    private static void printMessageSummary(FitMessages fitMessages) {
-        if(!fitMessages.getFileIdMesgs().isEmpty()) {
-            System.out.println("file id messages  : " + fitMessages.getFileIdMesgs().size());
-            System.out.println("device info messages  : " + fitMessages.getDeviceInfoMesgs().size());
-            System.out.println("activity messages : " + fitMessages.getActivityMesgs().size());
-            System.out.println("record messages : " + fitMessages.getRecordMesgs().size());
-        }
-    }*/
 
 }

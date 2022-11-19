@@ -15,20 +15,21 @@ public class FitImporter {
         return fitImporter;
     }
 
-    public void Import(FitFileRepository fitFileRepository,
+    public void Import(FitUploadRepository fitFileRepository,
                        FileIdRepository fileIdRepository,
                        String filename,
                        FitMessages fitMessages) {
 
-        FitFile fitFile = new FitFile(
+        FitUpload fitUpload = new FitUpload(
                 filename,
                 fitMessages.getDeviceInfoMesgs().get(0).getTimestamp().getDate(),
                 new Date());
 
         FileId fileId = FromFitToDao.toFileId(fitMessages.getFileIdMesgs().get(0));
-        fitFile.setFileId(fileId);
 
-        fitFileRepository.save(fitFile);
+        fileId.setFitUploadId(fitUpload);
 
+        fitFileRepository.save(fitUpload);
+        fileIdRepository.save(fileId);
     }
 }
