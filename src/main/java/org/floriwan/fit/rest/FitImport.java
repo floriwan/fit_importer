@@ -4,6 +4,9 @@ import com.garmin.fit.FitDecoder;
 import com.garmin.fit.FitMessages;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.floriwan.fit.data.FileIdRepository;
+import org.floriwan.fit.data.FitFileRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -43,15 +46,24 @@ public class FitImport {
         inputStream = (FileInputStream) file.getInputStream();
         FitMessages fitMessages = fitDecoder.decode(inputStream);
 
-        FitImporter.getInstance().Import(file.getOriginalFilename(), fitMessages);
+        FitImporter.getInstance().Import(
+                fitFileRepository,
+                fileIdRepository,
+                file.getOriginalFilename(),
+                fitMessages);
 
-        fitMessages.getFileIdMesgs().get(0).getType();
         //printMessageSummary(fitMessages);
         //log.info("import date : " + fitMessages.getDeviceInfoMesgs().get(0).getTimestamp());
         //log.info("file name : " + file.getOriginalFilename());
 
         return "redirect:/";
     }
+
+    @Autowired
+    public FitFileRepository fitFileRepository;
+
+    @Autowired
+    public FileIdRepository fileIdRepository;
 
     /*
     private static void printMessageSummary(FitMessages fitMessages) {

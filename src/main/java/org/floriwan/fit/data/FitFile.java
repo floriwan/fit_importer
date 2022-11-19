@@ -9,6 +9,14 @@ import java.util.Date;
 @Table(name = "fit_file")
 public class FitFile {
 
+    protected FitFile() {}
+
+    public FitFile(String name, Date activityDate, Date uploadDate) {
+        this.name = name;
+        this.activityDate = activityDate;
+        this.uploadDate = uploadDate;
+    }
+
     @Id
     @GeneratedValue
     private Long id;
@@ -30,7 +38,7 @@ public class FitFile {
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "fit_activity_id", referencedColumnName = "id")
-    private Activity activity;
+    private Activity activityId;
 
 }
 
