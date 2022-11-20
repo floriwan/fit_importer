@@ -6,6 +6,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.floriwan.fit.data.FileIdRepository;
 import org.floriwan.fit.data.FitUploadRepository;
+import org.floriwan.fit.data.SessionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -51,8 +52,9 @@ public class FitImport {
         FitMessages fitMessages = fitDecoder.decode(inputStream);
 
         FitImporter.getInstance().Import(
-                fitFileRepository,
+                fitUploadRepository,
                 fileIdRepository,
+                sessionRepository,
                 file.getOriginalFilename(),
                 fitMessages);
 
@@ -60,9 +62,11 @@ public class FitImport {
     }
 
     @Autowired
-    public FitUploadRepository fitFileRepository;
+    public FitUploadRepository fitUploadRepository;
 
     @Autowired
     public FileIdRepository fileIdRepository;
 
+    @Autowired
+    public SessionRepository sessionRepository;
 }

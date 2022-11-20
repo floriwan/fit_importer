@@ -32,19 +32,5 @@ public class FitUpload {
     @Column(nullable = false)
     private Date uploadDate;
 
-    //@OneToOne(cascade = CascadeType.ALL)
-    //@JoinColumn(name = "fit_file_id_id", referencedColumnName = "id")
-    //private FileId fileId;
-
-    //@OneToOne(cascade = CascadeType.ALL)
-    //@JoinColumn(name = "fit_activity_id", referencedColumnName = "id")
-    //private Activity activityId;
-
-    //public void setFileId(FileId fileId) {
-////  }
-
-    //public void setActivityId(Activity activityId) {
-      //  this.activityId = activityId;
-    //}
 }
 
