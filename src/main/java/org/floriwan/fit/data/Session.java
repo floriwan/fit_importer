@@ -15,7 +15,7 @@ import java.util.Date;
 @Table(name = "fit_session")
 public class Session {
 
-    public Session(Integer messageIndex, Date timestamp, short event, short eventType, Date startTime, Integer startPositionLat, Integer startPositionLong, short sport, short subSport, Float totalElapsedTime, Float totalTimerTime, Float totalDistance, Long totalCycles, Long totalRides, Long totalStrokes, Integer totalColories, Integer totalFatColories, Float avgSpeed, Float maxSpeed, Short avgHartRate, Short maxHartRate, Short avgCadence, Short avgRunningCadence, Short maxCadence, Short maxRunningCadence, Integer avgPower, Integer maxPower, Integer totalAscent, Integer totalDescent, Float totalTrainingEffect, Integer firstLapIndex, Integer numLaps, Short eventGroup, Integer necLat, Integer necLong, Integer swcLat, Integer swcLong, Integer numLengths, Integer normalizedPower, Float trainingStressScore, Float intensityFactor, Integer leftRightBalance, Float avgStrokeCount, Integer thresholdPower, Integer numActiveLength, Long totalWork, Float avgAltitude, Float maxAltitude, Short gpsAccuracy, Float avgGrade, Float avgPosGrade, Float avgNegGrade, Float maxPosGrade, Float maxNegGrade, Byte avgTemperature, Byte maxTemperatur, Float totalMovingTime, Float avgPosVerticalSpeed, Float avgNegVerticalSpeed, Float maxPosVerticalSpeed, Float maxNegVerticalSpeed, Short minHeartRate, Float[] timeInHrZone, int numTimeInHrZone, Float[] timeInSpeedZone, int numTimeInSpeedZone, Float[] timeInCadenceZone, int numTimeInCadenceZone, Float[] timeInPowerZone, int numTimeInPowerZone, Float avgLapTime, Integer betLapIndex, Float minAltitude, Integer playerScore, Integer opponentScore, String opponentName, Integer[] zoneCount, int numZoneCount, Float avgFractionalCadence, Float maxFractionalCadence, Float totalFractionalCycles, Float avgLeftTorqueEffectiveness, Float avgRightTorqueEffectiveness, Float avgLeftPedalSmoothness, Float avgRightPedalSmoothness, Float avgCombinedPedalSmoothness, Float timeStanding, Integer standCount) {
+    public Session(Integer messageIndex, Date timestamp, short event, short eventType, Date startTime, Integer startPositionLat, Integer startPositionLong, short sport, short subSport, Float totalElapsedTime, Float totalTimerTime, Float totalDistance, Long totalCycles, Long totalRides, Long totalStrokes, Integer totalColories, Integer totalFatColories, Float avgSpeed, Float maxSpeed, Short avgHartRate, Short maxHartRate, Short avgCadence, Short maxCadence, Integer avgPower, Integer maxPower, Integer totalAscent, Integer totalDescent, Float totalTrainingEffect, Integer firstLapIndex, Integer numLaps, Short eventGroup, Integer necLat, Integer necLong, Integer swcLat, Integer swcLong, Integer numLengths, Integer normalizedPower, Float trainingStressScore, Float intensityFactor, Integer leftRightBalance, Float avgStrokeCount, Integer thresholdPower, Integer numActiveLength, Long totalWork, Float avgAltitude, Float maxAltitude, Short gpsAccuracy, Float avgGrade, Float avgPosGrade, Float avgNegGrade, Float maxPosGrade, Float maxNegGrade, Byte avgTemperature, Byte maxTemperatur, Float totalMovingTime, Float avgPosVerticalSpeed, Float avgNegVerticalSpeed, Float maxPosVerticalSpeed, Float maxNegVerticalSpeed, Short minHeartRate, Float[] timeInHrZone, int numTimeInHrZone, Float[] timeInSpeedZone, int numTimeInSpeedZone, Float[] timeInCadenceZone, int numTimeInCadenceZone, Float[] timeInPowerZone, int numTimeInPowerZone, Float avgLapTime, Integer betLapIndex, Float minAltitude, Integer playerScore, Integer opponentScore, String opponentName, Integer[] zoneCount, int numZoneCount, Float avgFractionalCadence, Float maxFractionalCadence, Float totalFractionalCycles, Float avgLeftTorqueEffectiveness, Float avgRightTorqueEffectiveness, Float avgLeftPedalSmoothness, Float avgRightPedalSmoothness, Float avgCombinedPedalSmoothness, Float timeStanding, Integer standCount) {
         this.messageIndex = messageIndex;
         this.timestamp = timestamp;
         this.event = event;
@@ -38,9 +38,7 @@ public class Session {
         this.avgHartRate = avgHartRate;
         this.maxHartRate = maxHartRate;
         this.avgCadence = avgCadence;
-        this.avgRunningCadence = avgRunningCadence;
         this.maxCadence = maxCadence;
-        this.maxRunningCadence = maxRunningCadence;
         this.avgPower = avgPower;
         this.maxPower = maxPower;
         this.totalAscent = totalAscent;
@@ -185,13 +183,7 @@ public class Session {
     private Short avgCadence;
 
     @Column
-    private Short avgRunningCadence;
-
-    @Column
     private Short maxCadence;
-
-    @Column
-    private Short maxRunningCadence;
 
     @Column
     private Integer avgPower;

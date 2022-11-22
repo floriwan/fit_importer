@@ -6,6 +6,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.floriwan.fit.data.FileIdRepository;
 import org.floriwan.fit.data.FitUploadRepository;
+import org.floriwan.fit.data.RecordRepository;
 import org.floriwan.fit.data.SessionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -55,6 +56,7 @@ public class FitImport {
                 fitUploadRepository,
                 fileIdRepository,
                 sessionRepository,
+                recordRepository,
                 file.getOriginalFilename(),
                 fitMessages);
 
@@ -69,4 +71,7 @@ public class FitImport {
 
     @Autowired
     public SessionRepository sessionRepository;
+
+    @Autowired
+    public RecordRepository recordRepository;
 }

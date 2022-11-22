@@ -1,6 +1,8 @@
 package org.floriwan.fit.data;
 
+import com.garmin.fit.ActivityMesg;
 import com.garmin.fit.FileIdMesg;
+import com.garmin.fit.RecordMesg;
 import com.garmin.fit.SessionMesg;
 
 public final class FromFitToDao {
@@ -22,6 +24,38 @@ public final class FromFitToDao {
         fileId.setFitUploadId(fitUpload);
         return fileId;
 
+    }
+
+    public static Record toRecord(
+            FitUpload fitUpload,
+            RecordMesg recordMesg) {
+        return new Record(fitUpload,
+                recordMesg.getTimestamp().getDate(),
+                recordMesg.getPositionLat(),
+                recordMesg.getPositionLong(),
+                recordMesg.getAltitude(),
+                recordMesg.getHeartRate(),
+                recordMesg.getCadence(),
+                recordMesg.getDistance(),
+                recordMesg.getSpeed(),
+                recordMesg.getPower(),
+                recordMesg.getGrade(),
+                recordMesg.getResistance(),
+                recordMesg.getTimeFromCourse(),
+                recordMesg.getCycleLength(),
+                recordMesg.getTemperature(),
+                recordMesg.getCycles(),
+                recordMesg.getTotalCycles(),
+                recordMesg.getCompressedAccumulatedPower(),
+                recordMesg.getAccumulatedPower(),
+                recordMesg.getLeftRightBalance(),
+                recordMesg.getGpsAccuracy(),
+                recordMesg.getVerticalSpeed(),
+                //recordMesg.getActivityType().getValue(),
+                recordMesg.getTime128(),
+                recordMesg.getDeviceIndex(),
+                recordMesg.getEnhancedSpeed(),
+                recordMesg.getEnhancedAltitude());
     }
 
     public static Session toSession(
@@ -50,9 +84,7 @@ public final class FromFitToDao {
                 sessionMesg.getAvgHeartRate(),
                 sessionMesg.getMaxHeartRate(),
                 sessionMesg.getAvgCadence(),
-                sessionMesg.getAvgRunningCadence(),
                 sessionMesg.getMaxCadence(),
-                sessionMesg.getMaxRunningCadence(),
                 sessionMesg.getAvgPower(),
                 sessionMesg.getMaxPower(),
                 sessionMesg.getTotalAscent(),
